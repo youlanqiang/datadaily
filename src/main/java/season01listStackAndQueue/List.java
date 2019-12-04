@@ -1,8 +1,6 @@
 package season01listStackAndQueue;
 
-import java.util.Stack;
-
-public interface List<T> extends Collection{
+public interface List<T> extends Collection<T>{
 
     T get(int index);
 
@@ -10,6 +8,6 @@ public interface List<T> extends Collection{
 
     void add(int index, T x);
 
-    void remove(int index);
+    T remove(int index);
 
 }

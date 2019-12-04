@@ -1,7 +1,5 @@
 package season01listStackAndQueue;
 
-
-
 public interface Queue<T> {
 
     boolean add(T e);
