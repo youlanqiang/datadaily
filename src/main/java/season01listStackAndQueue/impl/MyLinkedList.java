@@ -1,13 +1,31 @@
 package season01listStackAndQueue.impl;
 
+
 import season01listStackAndQueue.List;
 
 import java.util.Iterator;
+import java.util.StringJoiner;
 
 /**
  *  双向链表
  */
 public class MyLinkedList<T> implements List<T> {
+
+    public static void main(String[] args) {
+
+        MyLinkedList<Integer> list = new MyLinkedList<>();
+        list.add(30);
+        list.add(20);
+        list.add(10);
+        list.add(0);
+        System.out.println(list);
+        list.remove(1);
+        System.out.println(list);
+        System.out.println(list.get(0));
+        System.out.println(list.get(1));
+        System.out.println(list.get(2));
+
+    }
 
     private int size;
 
@@ -32,7 +50,7 @@ public class MyLinkedList<T> implements List<T> {
 
     @Override
     public T get(int index) {
-        return getNode(index).value;
+        return getNode(index ).value;
     }
 
     @Override
@@ -51,7 +69,10 @@ public class MyLinkedList<T> implements List<T> {
 
     @Override
     public void add(int index, T x) {
-        addBefore(getNode(index), x);
+        /**
+         * todo 添加处 upper 为 size()
+         */
+        addBefore(getNode(index, 0 , size()), x);
     }
 
     @Override
@@ -111,7 +132,10 @@ public class MyLinkedList<T> implements List<T> {
 
 
     private Node<T> getNode(int index){
-        return getNode(index, 0, size);
+        /**
+         * todo 请记住这个 size - 1
+         */
+        return getNode(index , 0, size -1);
     }
 
     private Node<T> getNode(int index, int lower, int upper){
@@ -120,8 +144,12 @@ public class MyLinkedList<T> implements List<T> {
             throw new RuntimeException("超界");
         }
 
+        /**
+         * todo 这段代码保证，node不会是begin或者System.out.println(stack.pop());end
+         * 记住 node = begin.next这段代码
+         */
         if(index < size/2){
-            node = begin;
+            node = begin.next;
             for(int i = 0; i < index; i++){
                 node = node.next;
             }
@@ -214,5 +242,15 @@ public class MyLinkedList<T> implements List<T> {
             expectedModCount++;
             okToRemove = false;
         }
+    }
+
+    @Override
+    public String toString() {
+        StringJoiner joiner = new StringJoiner(",");
+        Iterator<T> iterator = this.iterator();
+        while(iterator.hasNext()){
+            joiner.add(iterator.next().toString());
+        }
+        return joiner.toString();
     }
 }
