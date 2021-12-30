@@ -70,7 +70,7 @@ public class MyLinkedList<T> implements List<T> {
     @Override
     public void add(int index, T x) {
         /**
-         * todo 添加处 upper 为 size()
+         * 添加处 upper 为 size()
          */
         addBefore(getNode(index, 0 , size()), x);
     }

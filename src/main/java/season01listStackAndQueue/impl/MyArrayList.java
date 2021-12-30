@@ -20,6 +20,7 @@ public class MyArrayList<T> implements List<T> {
         list.add(20);
         list.add(10);
         list.add(0);
+
         System.out.println(list);
         list.remove(1);
         System.out.println(list);
