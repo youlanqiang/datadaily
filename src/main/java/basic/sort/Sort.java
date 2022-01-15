@@ -14,9 +14,9 @@ public class Sort {
 
     public static void main(String[] args) {
         //insertionSort(arr); //插入排序
-        Integer[] arr = RandomUtils.randomArray(100);
+        Integer[] arr = RandomUtils.randomArray(7);
         Stopwatch stopwatch = Stopwatch.createStarted();
-        //bubbleSort(RandomUtils.randomArray(5), false);  //冒泡排序
+        //bubbleSort(arr, true);  //冒泡排序
         //insertionSort(arr, true);  // 插入排序
         selectionSort(arr, true); //选择排序
         stopwatch.stop();
@@ -25,6 +25,9 @@ public class Sort {
 
     }
 
+    /**
+     * 简单选择排序
+     */
     public static <T extends Comparable<? super T>> void selectionSort(T[] arr, boolean debug){
         if(debug){
             log.info("原始数组:{} 数组大小:{}", arr, arr.length);
@@ -39,9 +42,10 @@ public class Sort {
                     minIndex = j;
                 }
             }
-            T temp = arr[i];
-            arr[i] = arr[minIndex];
-            arr[minIndex] = temp;
+
+            arr[minIndex] = arr[i];
+            arr[i] = min;
+
 
             if(debug){
                 log.info("第{}次排序,数组:{}", i+1, arr);
@@ -56,8 +60,8 @@ public class Sort {
         if(debug){
             log.info("原始数组:{} 数组大小:{}", arr, arr.length);
         }
-        for (int i = arr.length - 1; i > 0; i--) {
-            for(int j = 0; j < i; j++ ){
+        for (int i = 0; i < arr.length -1; i++) {
+            for(int j = 0; j < arr.length - 1 - i; j++ ){
                 T temp = arr[j];
                 if(temp.compareTo(arr[j+1]) > 0){
                     arr[j] = arr[j+1];
