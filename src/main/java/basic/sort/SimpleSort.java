@@ -7,18 +7,18 @@ import utils.RandomUtils;
 
 
 /**
- * 一些简单的排序算法
+ * 3种简单的排序算法
  */
 @Slf4j
-public class Sort {
+public class SimpleSort {
 
     public static void main(String[] args) {
         //insertionSort(arr); //插入排序
-        Integer[] arr = RandomUtils.randomArray(7);
+        Integer[] arr = RandomUtils.randomArray(1_000_000);
         Stopwatch stopwatch = Stopwatch.createStarted();
-        //bubbleSort(arr, true);  //冒泡排序
+        bubbleSort(arr, true);  //冒泡排序
         //insertionSort(arr, true);  // 插入排序
-        selectionSort(arr, true); //选择排序
+        //selectionSort(arr, true); //选择排序
         stopwatch.stop();
         log.info("耗时:{}",stopwatch.toString());
         
@@ -62,14 +62,16 @@ public class Sort {
         }
         for (int i = 0; i < arr.length -1; i++) {
             for(int j = 0; j < arr.length - 1 - i; j++ ){
-                T temp = arr[j];
-                if(temp.compareTo(arr[j+1]) > 0){
+
+                if(arr[j].compareTo(arr[j+1]) > 0){
+                    T temp = arr[j];
                     arr[j] = arr[j+1];
                     arr[j+1] = temp;
                 }
+
             }
             if(debug){
-                log.info("第{}次排序,数组:{}",  arr.length - i, arr);
+                log.info("第{}次排序,数组:{}",  i + 1, arr);
             }
         }
     }
