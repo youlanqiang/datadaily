@@ -19,7 +19,8 @@ public class ShellSort {
         Integer[] arr = RandomUtils.randomArray(10);
         Stopwatch stopwatch = Stopwatch.createStarted();
 
-        shellSort(arr, true); //选择排序
+        //shellSort(arr, true); //选择排序
+        test(arr);
         stopwatch.stop();
         log.info("耗时:{}",stopwatch.toString());
     }
@@ -68,6 +69,26 @@ public class ShellSort {
                 }
             }
         }
+    }
+
+
+    public static <T extends Comparable<? super T>> void test(T[] arr){
+        log.info("原始数组:{} 数组大小:{}", arr, arr.length);
+
+
+        for(int gap = arr.length / 2; gap > 0; gap /= 2){ // 这个for循环用来 分步长
+            for(int i = gap; i < arr.length; i++){
+                for (int f =  i; f >= gap && arr[f].compareTo(arr[f-gap]) < 0 ; f-=gap){ // 用来执行交换
+                    T temp = arr[f];
+                    arr[f] = arr[f-gap];
+                    arr[f-gap] = temp;
+                }
+
+            }
+        }
+
+        log.info("排序后:{}", (Object) arr);
+
     }
 
 

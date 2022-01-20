@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import utils.RandomUtils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -20,9 +21,11 @@ public class QuickSort {
     public static void main(String[] args) {
 
         Integer[] arr = RandomUtils.randomArray(10);
+        log.info("排序前数组:{}",(Object) arr);
         Stopwatch stopwatch = Stopwatch.createStarted();
-        quickSort(arr, true);
+        sort(arr,0, arr.length - 1);
         stopwatch.stop();
+        log.info("排序后数组:{}",(Object) arr);
         log.info("耗时:{}",stopwatch.toString());
     }
 
@@ -99,6 +102,48 @@ public class QuickSort {
         if(right > l){
             quickSort(arr, l, right, debug);
         }
+
+    }
+
+    /**
+     * 更好的实现
+     */
+    public static void sort(Integer[] arr,int low, int high){
+        if (low >= high){
+            return;
+        }
+        // i,j
+        int i = low;
+        int j = high;
+
+        //key
+        int key = arr[i];
+
+        while (i < j){
+            while (arr[j] > key && i<j){
+                j --;
+            }
+            if (i < j){
+                int t ;
+                t = arr[j];
+                arr[j] = arr[i];
+                arr[i] = t;
+            }
+            while (arr[i] <= key && i<j){
+                i ++;
+            }
+            if (i < j){
+                int t;
+                t = arr[i];
+                arr[i] = arr[j];
+                arr[j] = t;
+            }
+        }
+        //对基准左侧的集合重复操作
+        sort(arr,low,i-1);
+
+        //对基准右侧的集合重复操作
+        sort(arr,i+1,high);
 
     }
 
