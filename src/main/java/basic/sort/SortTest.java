@@ -25,7 +25,11 @@ public abstract class SortTest {
     // 希尔排序
     protected abstract void shellSort(Integer[] arr);
 
-    protected abstract void quickSort(Integer[] arr);
+    // 快速排序
+    protected abstract void quickSort(Integer[] arr, int low, int high);
+
+    // 归并排序
+    protected abstract void mergeSort(Integer[] arr);
 
 
     public boolean isSort(Integer[] arr){
@@ -56,5 +60,13 @@ public abstract class SortTest {
         Integer[] shellArr = Arrays.copyOf(originArr, THRESHOLD);
         shellSort(shellArr);
         log.info("希尔排序 通过测试:{}, 排序后数组:{}", isSort(shellArr), shellArr);
+
+        Integer[] quickArr = Arrays.copyOf(originArr, THRESHOLD);
+        quickSort(quickArr,0, quickArr.length - 1);
+        log.info("快速排序 通过测试:{}, 排序后数组:{}", isSort(quickArr), quickArr);
+
+        Integer[] mergeArr = Arrays.copyOf(originArr, THRESHOLD);
+        mergeSort(mergeArr);
+        log.info("归并排序 通过测试:{}, 排序后数组:{}", isSort(mergeArr), mergeArr);
     }
 }

@@ -57,11 +57,11 @@ public class MergeSort {
         while( i <= mid && j <= right){
             // 如果左边的有序序列的当前元素
             // 小于等于右边有序序列的当前元素
-            // 即将左边的当前元素，拷贝到temp数组
-            // 然后t++, i++
             if(arr[i].compareTo(arr[j]) <= 0){
                 temp[t] = arr[i];
                 t += 1;
+                // 即将左边的当前元素，拷贝到temp数组
+                // 然后t++, i++
                 i += 1;
             } else { //反之 将右边有序序列的当前元素,填充到temp数组
                 temp[t] = arr[j];
