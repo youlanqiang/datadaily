@@ -1,5 +1,6 @@
 package season02tree.impl;
 
+
 import lombok.Data;
 import lombok.ToString;
 
@@ -34,6 +35,19 @@ public class BinaryTree<T> {
     }
 
     private Node<T> root;
+
+    public void delNode(T data){
+        if(root != null){
+            //如果只有一个root节点，则直接删除
+            if(root.data.equals(data)){
+                root = null;
+            }else{
+                root.delNode(data);
+            }
+        }else{
+            System.out.println("这是一颗空树，不能删除。");
+        }
+    }
 
     public void preOrder(){
         if(root!=null){
@@ -70,6 +84,33 @@ public class BinaryTree<T> {
             this.data = data;
             this.left = null;
             this.right = null;
+        }
+
+        //递归删除结点
+        //如果删除的节点是叶子节点，则删除该节点
+        //如果删除的节点是非叶子节点，则删除该子树
+        public void delNode(T data){
+            if(this.left != null && this.left.data.equals(data)){
+                this.left = null;
+                return;
+            }
+
+            if(this.right != null && this.right.data.equals(data)){
+                this.right = null;
+                return;
+            }
+
+            //左子树递归删除
+            if(this.left != null){
+                this.left.delNode(data);
+            }
+
+            //右子树递归删除
+            if(this.right != null){
+                this.right.delNode(data);
+            }
+
+
         }
 
         // 前序遍历
